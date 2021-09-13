@@ -15,25 +15,19 @@ class CurrencyServiceImpl implements CurrencyService {
   @override
   Future<List<Rate>>? getAllExchangeRates({String? base}) async {
     List<Rate>? webData = await _webApi.fetchExchangeRates();
-    if (base != null) {
-      return _convertBaseCurrency(base, webData ?? []);
-    }
+    if (base != null) return _convertBaseCurrency(base, webData ?? []);
     return Future.value(webData);
   }
 
   @override
   Future<List<Currency>> getFavoriteCurrencies() async {
     final favorites = await _storageService.getFavoriteCurrencies();
-    if (favorites == null || favorites.length <= 1) {
-      return defaultFavorites;
-    }
+    if (favorites == null || favorites.length <= 1) return defaultFavorites;
     return favorites;
   }
 
   List<Rate> _convertBaseCurrency(String base, List<Rate> remoteData) {
-    if (remoteData[0].baseCurrency == base) {
-      return remoteData;
-    }
+    if (remoteData[0].baseCurrency == base) return remoteData;
     num? divisor = remoteData
         .firstWhere((rate) => rate.quoteCurrency == base)
         .exchangeRate;

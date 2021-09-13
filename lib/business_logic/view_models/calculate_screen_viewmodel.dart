@@ -13,7 +13,11 @@ class CalculateScreenViewModel extends ChangeNotifier {
   List<Rate>? _rates = [];
 
   static final CurrencyPresentation defaultBaseCurrency = CurrencyPresentation(
-      flag: '', alphabeticCode: '', longName: '', amount: '');
+    flag: '',
+    alphabeticCode: '',
+    longName: '',
+    amount: '',
+  );
 
   void loadData() async {
     await _loadCurrencies();
@@ -30,9 +34,7 @@ class CalculateScreenViewModel extends ChangeNotifier {
   }
 
   CurrencyPresentation _loadBaseCurrency(List<Currency> currencies) {
-    if (currencies.length == 0) {
-      return defaultBaseCurrency;
-    }
+    if (currencies.length == 0) return defaultBaseCurrency;
     String code = currencies[0].isoCode ?? '';
     return CurrencyPresentation(
       flag: IsoData.flagOf(code),
@@ -46,23 +48,21 @@ class CalculateScreenViewModel extends ChangeNotifier {
     List<CurrencyPresentation> quotes = [];
     for (int i = 1; i < currencies.length; i++) {
       String code = currencies[i].isoCode ?? '';
-      quotes.add(CurrencyPresentation(
-        flag: IsoData.flagOf(code),
-        alphabeticCode: code,
-        longName: IsoData.longNameOf(code),
-        amount: currencies[i].amount.toStringAsFixed(2),
-      ));
+      quotes.add(
+        CurrencyPresentation(
+          flag: IsoData.flagOf(code),
+          alphabeticCode: code,
+          longName: IsoData.longNameOf(code),
+          amount: currencies[i].amount.toStringAsFixed(2),
+        ),
+      );
     }
     return quotes;
   }
 
-  CurrencyPresentation get baseCurrency {
-    return _baseCurrency;
-  }
+  CurrencyPresentation get baseCurrency => _baseCurrency;
 
-  List<CurrencyPresentation> get quoteCurrencies {
-    return _quoteCurrencies;
-  }
+  List<CurrencyPresentation> get quoteCurrencies => _quoteCurrencies;
 
   void calculateExchange(String baseAmount) async {
     double amount;
@@ -73,9 +73,7 @@ class CalculateScreenViewModel extends ChangeNotifier {
       notifyListeners();
       return null;
     }
-
     _updateCurrenciesFor(amount);
-
     notifyListeners();
   }
 

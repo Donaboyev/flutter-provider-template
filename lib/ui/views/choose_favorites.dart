@@ -22,9 +22,7 @@ class _ChooseFavoriteCurrencyScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Choose Currencies'),
-      ),
+      appBar: AppBar(title: Text('Choose Currencies')),
       body: buildListView(model),
     );
   }
@@ -51,9 +49,7 @@ class _ChooseFavoriteCurrencyScreenState
                 trailing: (model.choices[index].isFavorite ?? false)
                     ? Icon(Icons.favorite, color: Colors.red)
                     : Icon(Icons.favorite_border),
-                onTap: () {
-                  model.toggleFavoriteStatus(index);
-                },
+                onTap: () => model.toggleFavoriteStatus(index),
               ),
             );
           },

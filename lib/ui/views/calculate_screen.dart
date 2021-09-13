@@ -37,7 +37,8 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ChooseFavoriteCurrencyScreen()),
+                      builder: (context) => ChooseFavoriteCurrencyScreen(),
+                    ),
                   );
                   model.refreshFavorites();
                 },

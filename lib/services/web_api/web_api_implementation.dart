@@ -14,16 +14,12 @@ class WebApiImpl implements WebApi {
 
   Future<List<Rate>>? fetchExchangeRates() async {
     if (_rateCache == null) {
-      print('getting rates from the web');
       final uri = Uri.http(_host, _path, {_access: _apiKey});
       final results = await http.get(uri, headers: _headers);
-      print('===============> results $results');
       final jsonObject = json.decode(results.body);
-      print('===============> json object $jsonObject');
       _rateCache = _createRateListFromRawMap(jsonObject);
-    } else {
+    } else
       print('getting rates from cache');
-    }
     return Future.value(_rateCache);
   }
 
@@ -33,8 +29,6 @@ class WebApiImpl implements WebApi {
     List<Rate> list = [];
     list.add(Rate(baseCurrency: base, quoteCurrency: base, exchangeRate: 1.0));
     for (var rate in rates.entries) {
-      print('====================> key: ${rate.key}');
-      print('====================> value: ${rate.value}');
       list.add(
         Rate(
           baseCurrency: base,

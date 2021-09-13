@@ -37,9 +37,8 @@ class ChooseFavoritesViewModel extends ChangeNotifier {
   }
 
   bool _getFavoriteStatus(String code) {
-    for (Currency currency in _favorites) {
+    for (Currency currency in _favorites)
       if (code == currency.isoCode) return true;
-    }
     return false;
   }
 
@@ -47,11 +46,10 @@ class ChooseFavoritesViewModel extends ChangeNotifier {
     final isFavorite = !(_choices[choiceIndex].isFavorite ?? false);
     final code = _choices[choiceIndex].alphabeticCode;
     _choices[choiceIndex].isFavorite = isFavorite;
-    if (isFavorite) {
+    if (isFavorite)
       _addToFavorites(code ?? '');
-    } else {
+    else
       _removeFromFavorites(code ?? '');
-    }
     notifyListeners();
   }
 

@@ -29,9 +29,7 @@ class StorageServiceImpl implements StorageService {
   @override
   Future<List<Currency>> getFavoriteCurrencies() async {
     String data = await _getStringFromPreferences(sharedPrefCurrencyKey);
-    if (data == '') {
-      return [];
-    }
+    if (data == '') return [];
     return _deserializeCurrencies(data);
   }
 
@@ -61,9 +59,7 @@ class StorageServiceImpl implements StorageService {
   List<Currency> _deserializeCurrencies(String data) {
     final codeList = jsonDecode(data);
     List<Currency> list = [];
-    for (String code in codeList) {
-      list.add(Currency(code));
-    }
+    for (String code in codeList) list.add(Currency(code));
     return list;
   }
 
