@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:raywenderlich_provider/business_logic/models/currency.dart';
-import 'package:raywenderlich_provider/business_logic/models/rate.dart';
-import 'package:raywenderlich_provider/business_logic/utils/iso_data.dart';
-import 'package:raywenderlich_provider/services/currency/currency_service.dart';
-import 'package:raywenderlich_provider/services/service_locator.dart';
+
+import '../../services/currency/currency_service.dart';
+import '../../services/service_locator.dart';
+import '../models/currency.dart';
+import '../models/rate.dart';
+import '../utils/iso_data.dart';
 
 class CalculateScreenViewModel extends ChangeNotifier {
   final CurrencyService _currencyService = serviceLocator<CurrencyService>();
@@ -34,7 +35,7 @@ class CalculateScreenViewModel extends ChangeNotifier {
   }
 
   CurrencyPresentation _loadBaseCurrency(List<Currency> currencies) {
-    if (currencies.length == 0) return defaultBaseCurrency;
+    if (currencies.isEmpty) return defaultBaseCurrency;
     String code = currencies[0].isoCode ?? '';
     return CurrencyPresentation(
       flag: IsoData.flagOf(code),

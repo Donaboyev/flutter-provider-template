@@ -1,14 +1,13 @@
-import 'package:raywenderlich_provider/business_logic/models/currency.dart';
-import 'package:raywenderlich_provider/business_logic/models/rate.dart';
-import 'package:raywenderlich_provider/services/service_locator.dart';
-import 'package:raywenderlich_provider/services/storage/storage_service.dart';
-import 'package:raywenderlich_provider/services/web_api/web_api.dart';
-
+import '../../business_logic/models/currency.dart';
+import '../../business_logic/models/rate.dart';
+import '../service_locator.dart';
+import '../storage/storage_service.dart';
+import '../web_api/web_api.dart';
 import 'currency_service.dart';
 
 class CurrencyServiceImpl implements CurrencyService {
-  WebApi _webApi = serviceLocator<WebApi>();
-  StorageService _storageService = serviceLocator<StorageService>();
+  final WebApi _webApi = serviceLocator<WebApi>();
+  final StorageService _storageService = serviceLocator<StorageService>();
 
   static final defaultFavorites = [Currency('EUR'), Currency('USD')];
 
@@ -44,7 +43,7 @@ class CurrencyServiceImpl implements CurrencyService {
 
   @override
   Future<void> saveFavoriteCurrencies(List<Currency>? data) async {
-    if (data == null || data.length == 0) return;
+    if (data == null || data.isEmpty) return;
     await _storageService.saveFavoriteCurrencies(data);
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:raywenderlich_provider/business_logic/models/currency.dart';
-import 'package:raywenderlich_provider/business_logic/models/rate.dart';
-import 'package:raywenderlich_provider/business_logic/utils/iso_data.dart';
-import 'package:raywenderlich_provider/services/currency/currency_service.dart';
-import 'package:raywenderlich_provider/services/service_locator.dart';
+
+import '../../services/currency/currency_service.dart';
+import '../../services/service_locator.dart';
+import '../models/currency.dart';
+import '../models/rate.dart';
+import '../utils/iso_data.dart';
 
 class ChooseFavoritesViewModel extends ChangeNotifier {
   final CurrencyService _currencyService = serviceLocator<CurrencyService>();
@@ -37,8 +38,9 @@ class ChooseFavoritesViewModel extends ChangeNotifier {
   }
 
   bool _getFavoriteStatus(String code) {
-    for (Currency currency in _favorites)
+    for (Currency currency in _favorites) {
       if (code == currency.isoCode) return true;
+    }
     return false;
   }
 
@@ -46,10 +48,11 @@ class ChooseFavoritesViewModel extends ChangeNotifier {
     final isFavorite = !(_choices[choiceIndex].isFavorite ?? false);
     final code = _choices[choiceIndex].alphabeticCode;
     _choices[choiceIndex].isFavorite = isFavorite;
-    if (isFavorite)
+    if (isFavorite) {
       _addToFavorites(code ?? '');
-    else
+    } else {
       _removeFromFavorites(code ?? '');
+    }
     notifyListeners();
   }
 

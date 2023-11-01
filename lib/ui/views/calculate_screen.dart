@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raywenderlich_provider/business_logic/view_models/calculate_screen_viewmodel.dart';
-import 'package:raywenderlich_provider/services/service_locator.dart';
 
+import '../../business_logic/view_models/calculate_screen_viewmodel.dart';
+import '../../services/service_locator.dart';
 import 'choose_favorites.dart';
 
 class CalculateCurrencyScreen extends StatefulWidget {
+  const CalculateCurrencyScreen({super.key});
+
   @override
-  _CalculateCurrencyScreenState createState() =>
-      _CalculateCurrencyScreenState();
+  State<CalculateCurrencyScreen> createState() => _CalculateCurrencyScreenState();
 }
 
 class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
@@ -17,9 +18,9 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
 
   @override
   void initState() {
+    super.initState();
     model.loadData();
     _controller = TextEditingController();
-    super.initState();
   }
 
   @override
@@ -29,15 +30,15 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
       child: Consumer<CalculateScreenViewModel>(
         builder: (context, model, child) => Scaffold(
           appBar: AppBar(
-            title: Text('Moola X'),
+            title: const Text('Moola X'),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.favorite),
+                icon: const Icon(Icons.favorite),
                 onPressed: () async {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ChooseFavoriteCurrencyScreen(),
+                      builder: (context) => const ChooseFavoriteCurrencyScreen(),
                     ),
                   );
                   model.refreshFavorites();
@@ -63,7 +64,7 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
       padding: const EdgeInsets.only(left: 32, top: 32, right: 32, bottom: 5),
       child: Text(
         '${model.baseCurrency.longName}',
-        style: TextStyle(fontSize: 25),
+        style: const TextStyle(fontSize: 25),
       ),
     );
   }
@@ -74,10 +75,10 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.grey[200],
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: TextField(
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
           controller: _controller,
           decoration: InputDecoration(
             prefixIcon: Padding(
@@ -88,16 +89,16 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '${model.baseCurrency.flag}',
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
                 ),
               ),
             ),
-            labelStyle: TextStyle(fontSize: 20),
-            hintStyle: TextStyle(fontSize: 20),
+            labelStyle: const TextStyle(fontSize: 20),
+            hintStyle: const TextStyle(fontSize: 20),
             hintText: 'Amount to exchange',
             border: InputBorder.none,
-            contentPadding: EdgeInsets.all(20),
+            contentPadding: const EdgeInsets.all(20),
           ),
           keyboardType: TextInputType.number,
           onChanged: (text) {
@@ -119,7 +120,7 @@ class _CalculateCurrencyScreenState extends State<CalculateCurrencyScreen> {
                 width: 60,
                 child: Text(
                   '${model.quoteCurrencies[index].flag}',
-                  style: TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
               title: Text(model.quoteCurrencies[index].longName ?? ''),

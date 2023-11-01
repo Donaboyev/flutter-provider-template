@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:raywenderlich_provider/business_logic/models/currency.dart';
-import 'package:raywenderlich_provider/business_logic/models/rate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../business_logic/models/currency.dart';
+import '../../business_logic/models/rate.dart';
 import 'storage_service.dart';
 
 class StorageServiceImpl implements StorageService {
@@ -59,7 +59,9 @@ class StorageServiceImpl implements StorageService {
   List<Currency> _deserializeCurrencies(String data) {
     final codeList = jsonDecode(data);
     List<Currency> list = [];
-    for (String code in codeList) list.add(Currency(code));
+    for (String code in codeList) {
+      list.add(Currency(code));
+    }
     return list;
   }
 
